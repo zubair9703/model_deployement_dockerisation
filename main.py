@@ -5,14 +5,14 @@ from rasterio.io import MemoryFile
 from PIL import Image
 import numpy as np
 import io
-from src.unet_sentinel_resnet import unet,UnetResnetSentinel2
+from unet_sentinel_resnet import unet,UnetResnetSentinel2
 from fastapi.responses import StreamingResponse
 
 # Initialize FastAPI app
 app = FastAPI()
 
 model = unet.load_from_checkpoint(
-    checkpoint_path=r'model\arecanut-unetresnetsent2-128-epoch=333-val_JaccardIndex=0.46474990248680115.ckpt',
+    checkpoint_path=r'arecanut-unetresnetsent2-128-epoch=333-val_JaccardIndex=0.46474990248680115.ckpt',
     encoder = UnetResnetSentinel2,
     nc=3,
     c=15,
@@ -31,7 +31,6 @@ def inference(image: np.ndarray,model) -> np.ndarray:
         pr_masks = logits.softmax(dim=1)
         # Convert class probabilities to predicted class labels
         pr_masks = pr_masks.argmax(dim=1).squeeze().cpu().numpy()  # Shape: [H, W]
-        print(pr_masks)
     return pr_masks
 
 # Define the FastAPI endpoint for prediction

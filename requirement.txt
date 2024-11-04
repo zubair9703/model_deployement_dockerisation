@@ -9,5 +9,3 @@ scikit-image
 ipykernel
 lightning
 torchgeo
-"fastapi[standard]"
-pydantic 
