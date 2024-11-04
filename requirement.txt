@@ -1,0 +1,13 @@
+pandas
+geopandas
+rasterio
+xarray
+rioxarray
+matplotlib
+scikit-learn
+scikit-image
+ipykernel
+lightning
+torchgeo
+"fastapi[standard]"
+pydantic 
